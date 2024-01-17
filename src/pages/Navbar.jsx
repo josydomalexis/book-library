@@ -1,15 +1,19 @@
-import {
-
-  Link
-
-} from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from 'react'
+import { HimalayaTopWrapper } from "../App"
 function Navbar() {
+  const { isAuthenticated, setIsAuthenticated } = useContext(HimalayaTopWrapper)
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    console.log("logout")
+    setIsAuthenticated(false)
+    navigate("/admin")
+  }
   return (
 
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#"><b>LIBRARY Management</b></a>
+        <Link className="navbar-brand" to={"/"}><b>LIBRARY MANAGEMENT</b></Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -18,7 +22,10 @@ function Navbar() {
 
           </div>
           <div className='d-flex'>
-            <Link to={"/admin"} className="btn btn-warning" type="submit">Admin Dashboard</Link>
+            {
+              isAuthenticated ? <><Link to={"/admin"} className="btn btn-warning" type="submit">Admin Dashboard</Link> <button className="btn btn-warning ms-2" href="#" title="logout" onClick={() => handleLogout()}>Logout</button></> :
+                <Link to={"/admin"} className="btn btn-warning" type="submit">Admin Dashboard</Link>
+            }
           </div>
         </div>
       </div>

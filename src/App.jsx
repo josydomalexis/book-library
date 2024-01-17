@@ -1,30 +1,26 @@
 
 import "./App.css"
-import {
-  BrowserRouter,
-  Link,
-  Route,
-  Routes,
-} from "react-router-dom";
-
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/";
 import Dashboard from "./pages/Admin/";
 import Login from "./pages/Login";
-import { useState } from "react";
+import { useState, createContext } from "react";
+
+export const HimalayaTopWrapper = createContext()
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-  return (<>
-    <BrowserRouter>
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const dataToPass = {
+    isAuthenticated,
+    setIsAuthenticated
+  }
+  return (
+    <HimalayaTopWrapper.Provider value={dataToPass}>
       <Routes>
         <Route path="/" element={<Home />} />
-        {
-          isAuthenticated ? <Route path="/admin" element={<Dashboard />} /> : <Route path="/admin" element={<Login />} />
-        }
-
+        <Route path="/admin" element={isAuthenticated ? <Dashboard /> : <Login />} />
       </Routes>
-    </BrowserRouter>
-  </>
+    </HimalayaTopWrapper.Provider>
   )
 }
 

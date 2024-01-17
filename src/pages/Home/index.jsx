@@ -18,6 +18,8 @@ function index() {
           <Book />
           <Book />
           <Book />
+
+          <p className='text-center my-5'>No Books Available!</p>
         </div>
         <nav className="mt-5">
           <ul className="pagination justify-content-center">
