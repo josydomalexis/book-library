@@ -1,42 +1,57 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.navbar-brand {
+  color: #2f9e44 !important;
+}
+
+.navbar {
+  background-color: #b2f2bb !important;
+}
+
+.book {
+  background-color: rgb(228, 95, 0);
+  height: 300px;
+  border-radius: 2px 10px 10px 2px;
+}
+
+.book-inner-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.book-bind-mark {
+  border-right: 2px solid rgb(254, 106, 0);
+  width: 10%;
+  position: relative;
+}
+
+.book-bind-shadow {
+  border-right: 2px solid rgb(146, 61, 0);
+  height: 100%;
+  right: 0;
+}
+
+.book-front-detail {
+  padding: 10px;
   text-align: center;
+  margin: 0 auto;
+
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.book-front-title {
+  text-align: center;
+  background-color: #ffd43b;
+  padding: 8px 10px;
+  border-radius: 5px;
+  margin-bottom: 50px;
+
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.book-front-author,
+.book-front-isbn,
+.book-front-pub-date {
+  color: aliceblue;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.book-front-isbn,
+.book-front-pub-date {
+  font-size: .8rem;
 }
