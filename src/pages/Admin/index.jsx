@@ -1,15 +1,18 @@
 import Footer from "../Footer"
 import Navbar from "../Navbar"
+
+import { Link } from "react-router-dom";
 import "./index.css"
 
 function Dashboard() {
+
   return (
     <>
       <Navbar />
       <div className="container-fluid">
         <div className="container">
           <div className="p-3 mt-5 list-container border rounded">
-            <h3 className="border-bottom p-3">Book List <button className="btn btn-primary mx-2 float-end">Add Book</button></h3>
+            <h3 className="border-bottom p-3">Book List <Link to={"/admin/addbooks"} className="btn btn-primary mx-2 float-end">Add Book</Link></h3>
             <table className="table book-list">
               <thead>
                 <tr>
@@ -50,7 +53,7 @@ function Dashboard() {
             </table>
           </div>
           <div className="p-3 mt-5 list-container border rounded">
-            <h3 className="border-bottom p-3">Author List <button className="btn btn-warning mx-2 float-end">Add Author</button></h3>
+            <h3 className="border-bottom p-3">Author List <Link to={"/admin/addauthors"} className="btn btn-warning mx-2 float-end" >Add Author</Link></h3>
             <table className="table author-list">
               <thead>
                 <tr>
