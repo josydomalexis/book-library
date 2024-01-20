@@ -1,18 +1,24 @@
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 import { PostBook } from "../../config/api/API"
+import { useContext, useEffect } from "react"
+import { HimalayaTopWrapper } from "../../App"
 
 function index() {
+
+  const { GetAuthors, GetBooks, authors, setAuthors, books, setBooks } = useContext(HimalayaTopWrapper)
+
   const handleForm = (e) => {
     e.preventDefault();
-    const D = new Date();
-    let currentDate = D.getTime();
+    const CuD = new Date();
+    const pub = new Date(e.target[3].value);
+    console.log(pub)
     PostBook({
-      createdAt: currentDate,
+      createdAt: CuD.getTime(),
       title: e.target[0].value,
       author: e.target[1].value,
       isbn: e.target[2].value,
-      pub_date: D.getTime(e.target[3].value)
+      pub_date: pub.getTime()
     })
   }
   return (
@@ -39,9 +45,11 @@ function index() {
               <div className="form-floating mb-3">
                 <select className="form-select" id="book-Author" name="Author" aria-label="Author name">
                   <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {authors.map((author, index) => {
+                    return (
+                      <option key={index} value={author.id}>{author.name}</option>
+                    )
+                  })}
                 </select>
 
                 <label htmlFor="book-Author">Author</label>

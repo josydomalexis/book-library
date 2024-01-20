@@ -5,12 +5,14 @@ import { PostAuthor } from "../../config/api/API"
 function index() {
   const handleForm = (e) => {
     e.preventDefault();
-    const D = new Date();
-    let currentDate = D.getTime();
+    const CuD = new Date();
+    const dob = new Date(e.target[1].value)
+    console.log(e.target[1].value)
+
     PostAuthor({
-      createdAt: currentDate,
+      createdAt: CuD.getTime(),
       name: e.target[0].value,
-      dob: D.getTime(e.target[1].value),
+      dob: dob.getTime(),
       bio: e.target[2].value,
     })
   }
@@ -28,11 +30,11 @@ function index() {
                   name="author-name"
                   type="text"
                   className="form-control"
-                  placeholder="Book Title?"
-                  aria-label="Book Title?"
+                  placeholder="author-name?"
+                  aria-label="author-name?"
                   aria-describedby="basic-addon1"
                 />
-                <label htmlFor="book-Title">Title</label>
+                <label htmlFor="author-name">Author Name</label>
               </div>
 
               <div className="form-floating mb-3">
@@ -49,10 +51,11 @@ function index() {
               </div>
 
               <div className="form-floating">
-                <textarea className="form-control" placeholder="Biography" id="author-bio" name="author-bio" style="height: 100px"></textarea>
+                <textarea className="form-control" placeholder="Biography" id="author-bio" name="author-bio" style={{ height: "100px" }}></textarea>
                 <label htmlFor="author-bio">Biography</label>
               </div>
-              <div className="d-grid col-4 mx-auto">
+
+              <div className="d-grid col-4 mx-auto my-3">
                 <button className="btn btn-primary btn-lg" type="submit">Add</button>
               </div>
             </form>
