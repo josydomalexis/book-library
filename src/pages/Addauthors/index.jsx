@@ -1,8 +1,13 @@
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 import { PostAuthor } from "../../config/api/API"
+import { HimalayaTopWrapper } from "../../App"
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 function index() {
+  const { GetBooks, setBooks } = useContext(HimalayaTopWrapper)
+  const navigate = useNavigate();
   const handleForm = (e) => {
     e.preventDefault();
     const CuD = new Date();
@@ -15,7 +20,10 @@ function index() {
       dob: dob.getTime(),
       bio: e.target[2].value,
     })
+    GetBooks(setBooks)
+    navigate("/admin")
   }
+
   return (
     <>
       <Navbar />

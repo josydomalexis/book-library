@@ -1,12 +1,13 @@
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 import { PostBook } from "../../config/api/API"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { HimalayaTopWrapper } from "../../App"
+import { useNavigate } from "react-router-dom";
 
 function index() {
-
-  const { GetAuthors, GetBooks, authors, setAuthors, books, setBooks } = useContext(HimalayaTopWrapper)
+  const navigate = useNavigate();
+  const { authors } = useContext(HimalayaTopWrapper)
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ function index() {
       isbn: e.target[2].value,
       pub_date: pub.getTime()
     })
+    navigate("/admin")
   }
   return (
     <>

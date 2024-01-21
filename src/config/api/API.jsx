@@ -55,3 +55,15 @@ export const GetBooks = async (setBooks) => {
     .then((res) => res.json())
     .then((data) => setBooks(data))
 };
+
+export const GetBook = async (bookId, setBook) => {
+  const ENDPOINT = `https://${SECRETKEY}.${BOOKS_ENDPOINT}/${bookId}`;
+  await fetch(ENDPOINT, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => setBook(data))
+};

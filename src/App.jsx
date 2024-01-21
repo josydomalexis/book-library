@@ -1,20 +1,22 @@
 
 import "./App.css"
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/";
-import Dashboard from "./pages/Admin/";
+import { Route, Routes, useParams } from "react-router-dom";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Admin";
 import Addbooks from "./pages/Addbooks"
 import Addauthors from "./pages/Addauthors"
+import Bookdetails from "./pages/BookDetails"
 import Login from "./pages/Login";
 import { useState, createContext, useEffect } from "react";
-import { GetAuthors, GetBooks } from "./config/api/API"
+import { GetAuthors, GetBooks, GetBook } from "./config/api/API"
 
 export const HimalayaTopWrapper = createContext()
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authors, setAuthors] = useState(null)
-  const [books, setBooks] = useState(null)
+  const [books, setBooks] = useState([])
+  const [book, setBook] = useState({})
   useEffect(() => { GetAuthors(setAuthors), GetBooks(setBooks) }, []);
 
   const dataToPass = {
@@ -25,7 +27,10 @@ function App() {
     authors,
     setAuthors,
     books,
-    setBooks
+    setBooks,
+    GetBook,
+    setBook,
+    book
   }
   return (
     <HimalayaTopWrapper.Provider value={dataToPass}>
@@ -34,6 +39,7 @@ function App() {
         <Route path="/admin" element={isAuthenticated ? <Dashboard /> : <Login />} />
         <Route path="/admin/addbooks" element={isAuthenticated ? <Addbooks /> : <Login />} />
         <Route path="/admin/addauthors" element={isAuthenticated ? <Addauthors /> : <Login />} />
+        <Route path="/book/:bookName/:bookId" element={<Bookdetails />} />
       </Routes>
     </HimalayaTopWrapper.Provider>
   )

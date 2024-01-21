@@ -1,6 +1,6 @@
 import Footer from "../Footer"
 import Navbar from "../Navbar"
-
+import { useEffect } from "react"
 import { Link } from "react-router-dom";
 import "./index.css"
 import { Fragment, useContext } from "react";
@@ -8,7 +8,8 @@ import { HimalayaTopWrapper } from "../../App"
 
 function Dashboard() {
 
-  const { authors, books } = useContext(HimalayaTopWrapper)
+  const { authors, books, GetAuthors, setAuthors, GetBooks, setBooks } = useContext(HimalayaTopWrapper)
+  useEffect(() => { GetAuthors(setAuthors), GetBooks(setBooks) }, []);
   return (
     <>
       <Navbar />
@@ -16,7 +17,7 @@ function Dashboard() {
         <div className="container">
           <div className="p-3 mt-5 list-container border rounded">
             <h3 className="p-3">Book List <Link to={"/admin/addbooks"} className="btn btn-primary mx-2 float-end">Add Book</Link></h3>
-            {books.length === 0 ? <h4 className="p-3">No books added yet 😒</h4> : <table className="table book-list">
+            {books.length === 0 ? <h4 className="p-3 text-center">😒 No books added yet </h4> : <table className="table book-list">
               <thead>
                 <tr>
                   <th className="book-id" scope="col">#</th>
@@ -54,7 +55,7 @@ function Dashboard() {
           </div>
           <div className="p-3 mt-5 list-container border rounded">
             <h3 className="p-3">Author List <Link to={"/admin/addauthors"} className="btn btn-warning mx-2 float-end" >Add Author</Link></h3>
-            {authors.length === 0 ? <h4 className="p-3">No authors added yet 😒</h4> : <table className="table author-list">
+            {authors.length === 0 ? <h4 className="p-3 text-center">😒 No authors added yet </h4> : <table className="table author-list">
               <thead>
                 <tr>
                   <th className="author-id" scope="col">#</th>
@@ -74,7 +75,7 @@ function Dashboard() {
                           <th scope="row">{author.id}</th>
                           <td>{author.name}</td>
                           <td>{d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear()}</td>
-                          <td>{author.bio}</td>
+                          <td>{(author.bio).slice(0, 70)}{(author.bio).length > 70 ? "..." : ""}</td>
                           <td>
                             <button className="btn btn-primary me-3">Edit</button>
                             <button className="btn btn-primary">Delete</button>
